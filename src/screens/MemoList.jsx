@@ -58,10 +58,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     color: '#999',
   },
-  logOut: {
-    color: '#fff',
-    fontSize: 14,
-  },
 });
 
 export default MemoList;
