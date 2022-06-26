@@ -1,14 +1,20 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
+import MemoAppHeader from './src/screens/MemoAppHeader';
+import MemoList from './src/screens/MemoList';
 
 export default function App() {
+  const DATA = [
+    { id: '1', title: 'a', date: '20200101' },
+    { id: '2', title: 'b', date: '20200102' },
+  ];
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      {/* eslint-disable */}
-      <StatusBar style='auto' />
-    </View>
+    <>
+      <MemoAppHeader title='MemoApp' />
+      <MemoList data={DATA} />
+    </>
   );
 }
 
