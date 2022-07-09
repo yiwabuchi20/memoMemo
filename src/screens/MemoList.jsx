@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
-import { string, bool, shape, PropTypes } from 'prop-types';
+import { string, PropTypes } from 'prop-types';
 
 function MemoList({ data }) {
   const renderItem = (info) => {
@@ -19,7 +19,7 @@ function MemoList({ data }) {
     <FlatList
       data={data}
       renderItem={renderItem}
-      keyExtractor={({ item }) => item.id}
+      keyExtractor={({ id }) => id}
     />
   );
 }
