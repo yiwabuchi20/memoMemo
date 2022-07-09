@@ -1,8 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import React from 'react';
-import MemoAppHeader from './src/screens/MemoAppHeader';
-import MemoList from './src/screens/MemoList';
+import MemoAppHeader from './src/components/MemoAppHeader';
+import MemoList from './src/components/MemoList';
 import PlusButton from './src/components/PlusButton';
 
 export default function App() {
@@ -16,7 +16,7 @@ export default function App() {
       <StatusBar />
       <MemoAppHeader title='MemoApp' showLogout showBack />
       <MemoList data={DATA} />
-      <PlusButton onPress={() => {}} />
+      <PlusButton onPress={() => {}} icon='+' />
     </>
   );
 }

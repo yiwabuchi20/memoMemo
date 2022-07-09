@@ -2,15 +2,16 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { PropTypes } from 'prop-types';
 
-function PlusButton({ onPress }) {
+function PlusButton({ onPress, icon }) {
   return (
     <View style={styles.button} onPress={onPress}>
-      <Text style={styles.plus}>+</Text>
+      <Text style={styles.plus}>{icon}</Text>
     </View>
   );
 }
 
 PlusButton.propTypes = {
+  icon: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired,
 };
 
