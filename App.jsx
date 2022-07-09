@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import MemoAppHeader from './src/screens/MemoAppHeader';
 import MemoList from './src/screens/MemoList';
+import PlusButton from './src/components/PlusButton';
 
 export default function App() {
   const DATA = [
@@ -15,6 +16,7 @@ export default function App() {
       <StatusBar />
       <MemoAppHeader title='MemoApp' showLogout showBack />
       <MemoList data={DATA} />
+      <PlusButton onPress={() => {}} />
     </>
   );
 }

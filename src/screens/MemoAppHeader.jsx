@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { string, PropTypes } from 'prop-types';
 
-function MemoAppHeader({ title, showBack, showLogout }) {
+function MemoAppHeader({ title, showBack = false, showLogout = false }) {
   return (
     <View style={styles.container}>
       <View style={styles.leftCompontntContainer}>
