@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { string, bool, shape, PropTypes, number } from 'prop-types';
+import { View } from 'react-native';
+import { bool, number } from 'prop-types';
 
-function MASpacer({ size, holizontal = false }) {
+function MASpacer({ size, holizontal }) {
   const spacerStyle = holizontal
     ? { height: 0, width: size }
     : { height: size, width: 0 };
@@ -14,4 +14,6 @@ MASpacer.propTypes = {
   holizontal: bool,
 };
 
-export default MASpacer;
+MASpacer.defaultProps = {
+  holizontal: false,
+};
