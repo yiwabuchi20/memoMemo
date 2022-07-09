@@ -12,7 +12,8 @@ export default function App() {
 
   return (
     <>
-      <MemoAppHeader title='MemoApp' />
+      <StatusBar />
+      <MemoAppHeader title='MemoApp' showLogout showBack />
       <MemoList data={DATA} />
     </>
   );
