@@ -2,45 +2,55 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { string, PropTypes } from 'prop-types';
 
-function MemoAppHeader({ title, leftComponent, rightComponent }) {
+function MemoAppHeader({ title, showBack, showLogout }) {
   return (
     <View style={styles.container}>
-      <View style={styles.leftCompontntContainer}>{leftComponent}</View>
+      <View style={styles.leftCompontntContainer}>
+        {showBack && <Text style={styles.logout}>＜Back</Text>}
+      </View>
       <Text style={styles.title}>{title}</Text>
-      <View style={styles.rightCompontntContainer}>{rightComponent}</View>
+      <View style={styles.rightCompontntContainer}>
+        {showLogout && <Text style={styles.logout}>ログアウト</Text>}
+      </View>
     </View>
   );
 }
 
 MemoAppHeader.propTypes = {
   title: string.isRequired,
-  leftComponent: PropTypes.element,
-  rightComponent: PropTypes.element,
+  showBack: PropTypes.bool,
+  showLogout: PropTypes.bool,
 };
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: 100,
+    height: 104,
     backgroundColor: '#93E5AA',
     alignItems: 'flex-end',
-    marginTop: 32,
+    paddingBottom: 8,
+    paddingHorizontal: 8,
   },
   title: {
     color: '#fff',
-    fontSize: 28,
-    justifyContent: 'center',
+    fontSize: 24,
+    lineHeight: 32,
+    fontWeight: 'bold',
+    // justifyContent: 'center',
   },
   leftCompontntContainer: {
-    width: '10%',
-    justifyContent: 'center',
-    alignItems: 'flex-end',
+    width: '20%',
+    // justifyContent: 'center',
+    // alignItems: 'flex-end',
   },
   rightCompontntContainer: {
-    width: '10%',
-    justifyContent: 'center',
+    width: '20%',
+    // justifyContent: 'center',
     alignItems: 'flex-end',
+  },
+  logout: {
+    color: 'rgba(255, 255, 255, 0.8)',
   },
 });
 
