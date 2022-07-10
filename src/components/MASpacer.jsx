@@ -17,3 +17,5 @@ MASpacer.propTypes = {
 MASpacer.defaultProps = {
   holizontal: false,
 };
+
+export default MASpacer

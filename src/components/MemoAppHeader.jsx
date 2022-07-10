@@ -37,16 +37,12 @@ const styles = StyleSheet.create({
     fontSize: 24,
     lineHeight: 32,
     fontWeight: 'bold',
-    // justifyContent: 'center',
   },
   leftCompontntContainer: {
     width: '20%',
-    // justifyContent: 'center',
-    // alignItems: 'flex-end',
   },
   rightCompontntContainer: {
     width: '20%',
-    // justifyContent: 'center',
     alignItems: 'flex-end',
   },
   logout: {
