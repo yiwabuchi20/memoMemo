@@ -1,8 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
+import CircleButton from '../components/CircleButton';
 import MemoAppHeader from '../components/MemoAppHeader';
 import MemoList from '../components/MemoList';
-import PlusButton from '../components/PlusButton';
 
 export default function MemoListScreen() {
   const DATA = [
@@ -14,7 +14,7 @@ export default function MemoListScreen() {
       <StatusBar />
       <MemoAppHeader title='MemoApp' showLogout />
       <MemoList data={DATA} />
-      <PlusButton onPress={() => {}} icon='+' />
+      <CircleButton onPress={() => {}} icon='+' />
     </>
   );
 }

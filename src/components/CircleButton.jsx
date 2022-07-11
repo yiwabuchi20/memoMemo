@@ -2,17 +2,22 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { PropTypes } from 'prop-types';
 
-function EditButton({ onPress, icon }) {
+function CircleButton({ onPress, icon, style }) {
   return (
-    <View style={styles.button} onPress={onPress}>
+    <View style={[styles.button, style]} onPress={onPress}>
       <Text style={styles.plus}>{icon}</Text>
     </View>
   );
 }
 
-EditButton.propTypes = {
+CircleButton.propTypes = {
   icon: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired,
+  style: PropTypes.shape,
+};
+
+CircleButton.defaultProps = {
+  style: null,
 };
 
 const styles = StyleSheet.create({
@@ -20,10 +25,14 @@ const styles = StyleSheet.create({
     borderRadius: 1000,
     position: 'absolute',
     right: 30,
-    top: 140,
+    bottom: 30,
     width: 50,
     height: 50,
-    backgroundColor: '#93D0AA',
+    backgroundColor: '#93E5AA',
+    // shadowColor: '#000',
+    // shadowOffset: { width: 10, height: 18 },
+    // shadowOpacity: 0.75,
+    // shadowRadius: 8,
     elevation: 8,
   },
   plus: {
@@ -36,4 +45,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default EditButton;
+export default CircleButton;

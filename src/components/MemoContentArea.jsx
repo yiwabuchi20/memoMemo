@@ -1,14 +1,14 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { ScrollView, Text, StyleSheet } from 'react-native';
 import { PropTypes } from 'prop-types';
 import MASpacer from './MASpacer';
 
 function MemoContentArea({ data }) {
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <MASpacer size={30} />
       <Text>{data}</Text>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -22,7 +22,11 @@ MemoContentArea.defaultProps = {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 12,
+    paddingHorizontal: 24,
+    fontSize: 16,
+    lineHeight: 24,
+    backgroundColor: '#fff',
+    flex: 1,
   },
 });
 
