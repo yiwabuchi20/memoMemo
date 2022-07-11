@@ -22,11 +22,16 @@ MemoAppHeader.propTypes = {
   showLogout: PropTypes.bool,
 };
 
+MemoAppHeader.defaultProps = {
+  showBack: false,
+  showLogout: false,
+};
+
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: 104,
+    height: 96,
     backgroundColor: '#93E5AA',
     alignItems: 'flex-end',
     paddingBottom: 8,
