@@ -1,11 +1,13 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { PropTypes } from 'prop-types';
+import { Feather } from '@expo/vector-icons'; 
+
 
 function CircleButton({ onPress, icon, style }) {
   return (
     <View style={[styles.button, style]} onPress={onPress}>
-      <Text style={styles.plus}>{icon}</Text>
+      <Feather style={styles.plus} name="plus" size={24} color="white" />
     </View>
   );
 }
@@ -29,6 +31,7 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     backgroundColor: '#93E5AA',
+    flex:1,
     // shadowColor: '#000',
     // shadowOffset: { width: 10, height: 18 },
     // shadowOpacity: 0.75,
@@ -36,11 +39,10 @@ const styles = StyleSheet.create({
     elevation: 8,
   },
   plus: {
-    position: 'relative',
+    position:"relative",
     alignSelf: 'center',
-    top: 2,
-    justifyContent: 'center',
-    color: '#fff',
+    // justifyContent:"center",
+    top:8,
     fontSize: 30,
   },
 });
