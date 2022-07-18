@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
 import { string, PropTypes } from 'prop-types';
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+
 
 function MemoList({ data }) {
   const renderItem = (info) => {
@@ -11,7 +13,7 @@ function MemoList({ data }) {
           <Text style={styles.title}>{item.title}</Text>
           <Text style={styles.date}>{item.date}</Text>
         </View>
-        <Text style={styles.delete}>X</Text>
+        <MaterialCommunityIcons style={styles.delete} name="close" size={20} color="white" />
       </View>
     );
   };

@@ -1,19 +1,19 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { PropTypes } from 'prop-types';
-import { Feather } from '@expo/vector-icons'; 
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 
 
-function CircleButton({ onPress, icon, style }) {
+function CircleButton({ onPress, name, style }) {
   return (
     <View style={[styles.button, style]} onPress={onPress}>
-      <Feather style={styles.plus} name="plus" size={24} color="white" />
+      <MaterialCommunityIcons style={styles.plus} name={name} size={16} color="white" />
     </View>
   );
 }
 
 CircleButton.propTypes = {
-  icon: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired,
   style: PropTypes.shape,
 };
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     position:"relative",
     alignSelf: 'center',
     // justifyContent:"center",
-    top:8,
+    top:9,
     fontSize: 30,
   },
 });

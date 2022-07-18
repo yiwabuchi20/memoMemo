@@ -14,7 +14,7 @@ export default function MemoListScreen() {
       <StatusBar />
       <MemoAppHeader title='MemoApp' showLogout />
       <MemoList data={DATA} />
-      <CircleButton onPress={() => {}} icon='+' />
+      <CircleButton onPress={() => {}} name='plus' />
     </>
   );
 }

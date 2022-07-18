@@ -17,7 +17,7 @@ export default function MemoDetailScreen() {
       <MemoListItem item={ITEM} />
       <CircleButton
         onPress={() => {}}
-        icon='✍'
+        name={"pencil"}
         style={{ right: 30, top: 140, bottom: 'auto' }}
       />
       <MemoContentArea data={CONTENT} />
