@@ -3,8 +3,6 @@ import { View, Text, StyleSheet, FlatList } from 'react-native';
 import { string, PropTypes } from 'prop-types';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-import Icon from "./icon"
-
 function MemoList({ data }) {
   const renderItem = (info) => {
     const { item } = info;
