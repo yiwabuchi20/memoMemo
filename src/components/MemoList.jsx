@@ -1,8 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
 import { string, PropTypes } from 'prop-types';
-import { MaterialCommunityIcons } from '@expo/vector-icons'; 
-
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 function MemoList({ data }) {
   const renderItem = (info) => {
@@ -17,13 +16,7 @@ function MemoList({ data }) {
       </View>
     );
   };
-  return (
-    <FlatList
-      data={data}
-      renderItem={renderItem}
-      keyExtractor={({ id }) => id}
-    />
-  );
+  return <FlatList data={data} renderItem={renderItem} keyExtractor={({ id }) => id} />;
 }
 
 MemoList.propTypes = {
