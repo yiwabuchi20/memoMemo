@@ -1,8 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { PropTypes } from 'prop-types';
-import { MaterialCommunityIcons } from '@expo/vector-icons'; 
-
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 function CircleButton({ onPress, name, style }) {
   return (
@@ -31,18 +30,18 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     backgroundColor: '#93E5AA',
-    flex:1,
-    // shadowColor: '#000',
-    // shadowOffset: { width: 10, height: 18 },
-    // shadowOpacity: 0.75,
-    // shadowRadius: 8,
+    flex: 1,
+    shadowColor: '#000',
+    shadowOffset: { width: 10, height: 18 },
+    shadowOpacity: 0.25,
+    shadowRadius: 8,
     elevation: 8,
   },
   plus: {
-    position:"relative",
+    position: 'relative',
     alignSelf: 'center',
     // justifyContent:"center",
-    top:9,
+    top: 9,
     fontSize: 30,
   },
 });

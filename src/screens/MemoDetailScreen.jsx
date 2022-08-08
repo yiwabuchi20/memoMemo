@@ -15,12 +15,12 @@ export default function MemoDetailScreen() {
       <StatusBar />
       <MemoAppHeader title='MemoApp' showBack />
       <MemoListItem item={ITEM} />
+      <MemoContentArea data={CONTENT} />
       <CircleButton
         onPress={() => {}}
         name={"pencil"}
-        style={{ right: 30, top: 140, bottom: 'auto' }}
+        style={{ right: 30, top: 135, bottom: 'auto' }}
       />
-      <MemoContentArea data={CONTENT} />
     </>
   );
 }
