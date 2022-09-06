@@ -2,16 +2,21 @@ import React from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import { string, PropTypes } from 'prop-types';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 function MemoList({ data }) {
+  const navigation = useNavigation();
+  const onPressItem = () => {
+    navigation.navigate('Detail');
+  };
   const renderItem = (info) => {
     const { item } = info;
     return (
       <View style={styles.container}>
-        <View style={styles.memo}>
+        <TouchableOpacity style={styles.memo} onPress={onPressItem}>
           <Text style={styles.title}>{item.title}</Text>
           <Text style={styles.date}>{item.date}</Text>
-        </View>
+        </TouchableOpacity>
         <TouchableOpacity onPress={() => {}} style={styles.delete}>
           <MaterialCommunityIcons name="close" size={20} color="#999" />
         </TouchableOpacity>
@@ -41,6 +46,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   memo: {
+    flex: 1,
     justifyContent: 'flex-end',
   },
   title: {
