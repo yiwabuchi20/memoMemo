@@ -5,7 +5,7 @@ import CircleButton from '../components/CircleButton';
 import MemoAppHeader from '../components/MemoAppHeader';
 
 export default function MemoEditScreen() {
-  const [text, setText] = useState();
+  const [text, setText] = useState('');
   return (
     <>
       <StatusBar />
