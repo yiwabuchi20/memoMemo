@@ -1,13 +1,13 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { PropTypes } from 'prop-types';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 function CircleButton({ onPress, name, style }) {
   return (
-    <View style={[styles.button, style]} onPress={onPress}>
+    <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
       <MaterialCommunityIcons style={styles.plus} name={name} size={16} color="white" />
-    </View>
+    </TouchableOpacity>
   );
 }
 

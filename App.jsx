@@ -5,5 +5,5 @@ import MemoEditScreen from './src/screens/MemoEditScreen';
 import MemoLogInScreen from './src/screens/MemoLogInScreen';
 
 export default function App() {
-  return <MemoLogInScreen />;
+  return <MemoListScreen />;
 }
