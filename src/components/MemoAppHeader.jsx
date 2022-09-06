@@ -1,16 +1,32 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { string, PropTypes } from 'prop-types';
+import { useNavigation } from '@react-navigation/native';
 
 function MemoAppHeader({ title, showBack = false, showLogout = false }) {
+  const navigation = useNavigation();
+  const onPressBack = () => {
+    navigation.goBack();
+  };
+  const onPressLogOut = () => {
+    navigation.navigate('LogIn');
+  };
   return (
     <View style={styles.container}>
       <View style={styles.leftCompontntContainer}>
-        {showBack && <Text style={styles.logout}>＜Back</Text>}
+        {showBack && (
+          <TouchableOpacity onPress={onPressBack}>
+            <Text style={styles.logout}>＜Back</Text>
+          </TouchableOpacity>
+        )}
       </View>
       <Text style={styles.title}>{title}</Text>
       <View style={styles.rightCompontntContainer}>
-        {showLogout && <Text style={styles.logout}>ログアウト</Text>}
+        {showLogout && (
+          <TouchableOpacity onPress={onPressLogOut}>
+            <Text style={styles.logout}>ログアウト</Text>
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   );

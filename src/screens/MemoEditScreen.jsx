@@ -4,8 +4,12 @@ import { TextInput, StyleSheet, View, KeyboardAvoidingView } from 'react-native'
 import CircleButton from '../components/CircleButton';
 import MemoAppHeader from '../components/MemoAppHeader';
 
-export default function MemoEditScreen() {
+export default function MemoEditScreen(props) {
   const [text, setText] = useState('');
+  const { navigation } = props;
+  const onPressCheck = () => {
+    navigation.goBack();
+  };
   return (
     <>
       <StatusBar />
@@ -14,13 +18,7 @@ export default function MemoEditScreen() {
         <View style={styles.inputContainer}>
           <TextInput value={text} onChangeText={setText} style={styles.input} multiline />
         </View>
-        <CircleButton
-          onPress={() => {
-            console.log('press');
-          }}
-          name={'check'}
-          style={{ right: 30, bottom: 40 }}
-        />
+        <CircleButton onPress={onPressCheck} name={'check'} style={{ right: 30, bottom: 40 }} />
       </KeyboardAvoidingView>
     </>
   );
