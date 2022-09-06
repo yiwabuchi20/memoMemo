@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { TextInput, StyleSheet, View, Text } from 'react-native';
+import { TextInput, StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import Button from '../components/Button';
 import MASpacer from '../components/MASpacer';
 import MemoAppHeader from '../components/MemoAppHeader';
@@ -25,12 +25,14 @@ export default function MemoLogInScreen() {
         <MASpacer size={16} />
         <TextInput style={styles.input} value={pass} onChange={setPass} placeholder="Password" />
         <MASpacer size={16} />
-        <Button buttonText="Submit" />
+        <Button buttonText="Submit" onPress={() => {}} />
         <MASpacer size={24} />
         <View style={styles.signUpContainer}>
           <Text>Not registerd?</Text>
           <MASpacer holizontal size={8} />
-          <Text style={styles.signUpText}>Sign up here!</Text>
+          <TouchableOpacity onPress={() => {}}>
+            <Text style={styles.signUpText}>Sign up here!</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </>

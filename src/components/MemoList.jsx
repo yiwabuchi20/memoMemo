@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import { string, PropTypes } from 'prop-types';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
@@ -12,7 +12,9 @@ function MemoList({ data }) {
           <Text style={styles.title}>{item.title}</Text>
           <Text style={styles.date}>{item.date}</Text>
         </View>
-        <MaterialCommunityIcons style={styles.delete} name="close" size={20} color="white" />
+        <TouchableOpacity onPress={() => {}} style={styles.delete}>
+          <MaterialCommunityIcons name="close" size={20} color="#999" />
+        </TouchableOpacity>
       </View>
     );
   };
@@ -51,7 +53,6 @@ const styles = StyleSheet.create({
   },
   delete: {
     alignSelf: 'center',
-    color: '#999',
   },
 });
 

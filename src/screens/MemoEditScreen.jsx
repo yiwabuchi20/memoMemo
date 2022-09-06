@@ -14,7 +14,13 @@ export default function MemoEditScreen() {
         <View style={styles.inputContainer}>
           <TextInput value={text} onChangeText={setText} style={styles.input} multiline />
         </View>
-        <CircleButton onPress={() => {}} name={'check'} style={{ right: 30, bottom: 40 }} />
+        <CircleButton
+          onPress={() => {
+            console.log('press');
+          }}
+          name={'check'}
+          style={{ right: 30, bottom: 40 }}
+        />
       </KeyboardAvoidingView>
     </>
   );
