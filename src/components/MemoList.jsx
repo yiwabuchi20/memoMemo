@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, Alert } from 'react-native';
 import { string, PropTypes } from 'prop-types';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -17,7 +17,12 @@ function MemoList({ data }) {
           <Text style={styles.title}>{item.title}</Text>
           <Text style={styles.date}>{item.date}</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {}} style={styles.delete}>
+        <TouchableOpacity
+          onPress={() => {
+            Alert.alert('Are you sure?');
+          }}
+          style={styles.delete}
+        >
           <MaterialCommunityIcons name="close" size={20} color="#999" />
         </TouchableOpacity>
       </View>
@@ -44,6 +49,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     borderBottomColor: '#ccc',
     borderBottomWidth: 1,
+    backgroundColor: '#fff',
   },
   memo: {
     flex: 1,
@@ -59,6 +65,7 @@ const styles = StyleSheet.create({
   },
   delete: {
     alignSelf: 'center',
+    padding: 8,
   },
 });
 
