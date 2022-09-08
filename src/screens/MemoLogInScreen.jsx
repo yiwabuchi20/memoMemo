@@ -28,9 +28,20 @@ export default function MemoLogInScreen(props) {
           value={mail}
           onChange={setMail}
           placeholder="Email Address"
+          autoCapitalize="none"
+          keyboardType="email-address"
+          textContentType="emailAddress"
         />
         <MASpacer size={16} />
-        <TextInput style={styles.input} value={pass} onChange={setPass} placeholder="Password" />
+        <TextInput
+          style={styles.input}
+          value={pass}
+          onChange={setPass}
+          placeholder="Password"
+          autoCapitalize="none"
+          secureTextEntry
+          textContentType="password"
+        />
         <MASpacer size={16} />
         <Button buttonText="Submit" onPress={onPressSubmit} />
         <MASpacer size={24} />

@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { TextInput, StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { TextInput, StyleSheet, View, } from 'react-native';
 import Button from '../components/Button';
 import MASpacer from '../components/MASpacer';
 import MemoAppHeader from '../components/MemoAppHeader';
@@ -14,16 +14,25 @@ export default function MemoSignUpScreen() {
       <MemoAppHeader title="MemoApp" showBack />
       <View style={styles.container}>
         <MASpacer size={16} />
-        <Text style={styles.title}>Sign Up</Text>
-        <MASpacer size={16} />
         <TextInput
           style={styles.input}
           value={mail}
           onChange={setMail}
           placeholder="Email Address"
+          autoCapitalize="none"
+          keyboardType="email-address"
+          textContentType="emailAddress"
         />
         <MASpacer size={16} />
-        <TextInput style={styles.input} value={pass} onChange={setPass} placeholder="Password" />
+        <TextInput
+          style={styles.input}
+          value={pass}
+          onChange={setPass}
+          placeholder="Password"
+          autoCapitalize="none"
+          secureTextEntry
+          textContentType="password"
+        />
         <MASpacer size={16} />
         <Button buttonText="Submit" onPress={() => {}} />
         <MASpacer size={24} />
