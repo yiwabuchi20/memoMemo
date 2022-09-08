@@ -1,14 +1,29 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { TextInput, StyleSheet, View, KeyboardAvoidingView } from 'react-native';
+import firebase from 'firebase';
 import CircleButton from '../components/CircleButton';
 import MemoAppHeader from '../components/MemoAppHeader';
 
 export default function MemoEditScreen(props) {
-  const [text, setText] = useState('');
+  const [bodyText, setBodyText] = useState('');
   const { navigation } = props;
   const onPressCheck = () => {
-    navigation.goBack();
+    const db = firebase.firestore();
+    const { currentUser } = firebase.auth();
+    const ref = db.collection(`users/${currentUser.uid}/memos`);
+    ref
+      .add({
+        bodyText,
+        updatedAt: new Date(),
+      })
+      .then((docRef) => {
+        console.log('created', docRef.id);
+        navigation.goBack();
+      })
+      .catch((error) => {
+        console.log('error', error);
+      });
   };
   return (
     <>
@@ -16,7 +31,13 @@ export default function MemoEditScreen(props) {
       <MemoAppHeader title="MemoApp" showBack />
       <KeyboardAvoidingView style={styles.container} behavior="height">
         <View style={styles.inputContainer}>
-          <TextInput value={text} onChangeText={setText} style={styles.input} multiline />
+          <TextInput
+            value={bodyText}
+            onChangeText={setBodyText}
+            style={styles.input}
+            multiline
+            autoFocus
+          />
         </View>
         <CircleButton onPress={onPressCheck} name={'check'} style={{ right: 30, bottom: 40 }} />
       </KeyboardAvoidingView>
