@@ -1,6 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { TextInput, StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { TextInput, StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
+import firebase from 'firebase';
+import { shape, func } from 'prop-types';
 import Button from '../components/Button';
 import MASpacer from '../components/MASpacer';
 import MemoAppHeader from '../components/MemoAppHeader';
@@ -10,7 +12,17 @@ export default function MemoLogInScreen(props) {
   const [pass, setPass] = useState('');
   const { navigation } = props;
   const onPressSubmit = () => {
-    navigation.navigate('List');
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(mail, pass)
+      .then((userCredential) => {
+        const { user } = userCredential;
+        console.log(user.uid);
+        navigation.navigate('List');
+      })
+      .catch((error) => {
+        Alert.alert(error.code);
+      });
   };
   const onPressSignUpText = () => {
     navigation.navigate('SignUp');
@@ -26,7 +38,7 @@ export default function MemoLogInScreen(props) {
         <TextInput
           style={styles.input}
           value={mail}
-          onChange={setMail}
+          onChangeText={setMail}
           placeholder="Email Address"
           autoCapitalize="none"
           keyboardType="email-address"
@@ -36,7 +48,7 @@ export default function MemoLogInScreen(props) {
         <TextInput
           style={styles.input}
           value={pass}
-          onChange={setPass}
+          onChangeText={setPass}
           placeholder="Password"
           autoCapitalize="none"
           secureTextEntry
@@ -56,6 +68,10 @@ export default function MemoLogInScreen(props) {
     </>
   );
 }
+
+MemoLogInScreen.prototype = {
+  navigation: shape({ navigate: func }),
+};
 
 const styles = StyleSheet.create({
   container: {

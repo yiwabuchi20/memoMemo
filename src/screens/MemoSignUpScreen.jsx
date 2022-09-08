@@ -1,23 +1,43 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { TextInput, StyleSheet, View, } from 'react-native';
+import { TextInput, StyleSheet, View, Text, Alert } from 'react-native';
+import firebase from 'firebase';
+import { shape, func } from 'prop-types';
 import Button from '../components/Button';
 import MASpacer from '../components/MASpacer';
 import MemoAppHeader from '../components/MemoAppHeader';
 
-export default function MemoSignUpScreen() {
+export default function MemoSignUpScreen(props) {
   const [mail, setMail] = useState('');
   const [pass, setPass] = useState('');
+  const { navigation } = props;
+
+  const handlePress = () => {
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(mail, pass)
+      .then((userCredential) => {
+        const { user } = userCredential;
+        console.log(user.uid);
+        navigation.navigate('List');
+      })
+      .catch((error) => {
+        console.log(error.code, error.message);
+        Alert.alert(error.code);
+      });
+  };
   return (
     <>
       <StatusBar />
       <MemoAppHeader title="MemoApp" showBack />
       <View style={styles.container}>
         <MASpacer size={16} />
+        <Text style={styles.title}>Sign Up</Text>
+        <MASpacer size={16} />
         <TextInput
           style={styles.input}
           value={mail}
-          onChange={setMail}
+          onChangeText={setMail}
           placeholder="Email Address"
           autoCapitalize="none"
           keyboardType="email-address"
@@ -27,19 +47,23 @@ export default function MemoSignUpScreen() {
         <TextInput
           style={styles.input}
           value={pass}
-          onChange={setPass}
+          onChangeText={setPass}
           placeholder="Password"
           autoCapitalize="none"
           secureTextEntry
           textContentType="password"
         />
         <MASpacer size={16} />
-        <Button buttonText="Submit" onPress={() => {}} />
+        <Button buttonText="Submit" onPress={handlePress} />
         <MASpacer size={24} />
       </View>
     </>
   );
 }
+
+MemoSignUpScreen.prototype = {
+  navigation: shape({ navigate: func }),
+};
 
 const styles = StyleSheet.create({
   container: {
