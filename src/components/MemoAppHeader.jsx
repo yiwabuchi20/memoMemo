@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { string, PropTypes } from 'prop-types';
 import { useNavigation } from '@react-navigation/native';
+import firebase from 'firebase';
 
 function MemoAppHeader({ title, showBack = false, showLogout = false }) {
   const navigation = useNavigation();
@@ -9,7 +10,15 @@ function MemoAppHeader({ title, showBack = false, showLogout = false }) {
     navigation.goBack();
   };
   const onPressLogOut = () => {
-    navigation.navigate('LogIn');
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        navigation.navigate('LogIn');
+      })
+      .catch(() => {
+        Alert.alert('ログアウトに失敗しました');
+      });
   };
   return (
     <View style={styles.container}>
@@ -67,6 +76,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   logout: {
+    fontSize: 14,
     color: 'rgba(255, 255, 255, 0.8)',
   },
 });
