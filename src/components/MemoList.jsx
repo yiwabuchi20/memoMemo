@@ -1,19 +1,24 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Alert } from 'react-native';
-import { string, PropTypes, shape, instanceOf } from 'prop-types';
+import { string, PropTypes, shape } from 'prop-types';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
 function MemoList({ data }) {
   const navigation = useNavigation();
-  const onPressItem = () => {
-    navigation.navigate('Detail');
+  const onPressItem = (id) => {
+    navigation.navigate('Detail', { id });
   };
   const renderItem = (info) => {
     const { item } = info;
     return (
       <View style={styles.container}>
-        <TouchableOpacity style={styles.memo} onPress={onPressItem}>
+        <TouchableOpacity
+          style={styles.memo}
+          onPress={() => {
+            onPressItem(item.id);
+          }}
+        >
           <Text style={styles.title} numberOfLines={1}>
             {item.title}
           </Text>
