@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Alert } from 'react-native';
-import { string, PropTypes } from 'prop-types';
+import { string, PropTypes, shape, instanceOf } from 'prop-types';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
@@ -14,7 +14,9 @@ function MemoList({ data }) {
     return (
       <View style={styles.container}>
         <TouchableOpacity style={styles.memo} onPress={onPressItem}>
-          <Text style={styles.title}>{item.title}</Text>
+          <Text style={styles.title} numberOfLines={1}>
+            {item.title}
+          </Text>
           <Text style={styles.date}>{item.date}</Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -33,7 +35,7 @@ function MemoList({ data }) {
 
 MemoList.propTypes = {
   data: PropTypes.arrayOf(
-    PropTypes.shape({
+    shape({
       id: string,
       title: string,
       date: string,
@@ -53,15 +55,15 @@ const styles = StyleSheet.create({
   },
   memo: {
     flex: 1,
-    justifyContent: 'flex-end',
+    justifyContent: 'space-evenly',
   },
   title: {
     color: '#666',
-    fontSize: 28,
+    fontSize: 20,
   },
   date: {
     color: '#666',
-    fontSize: 14,
+    fontSize: 12,
   },
   delete: {
     alignSelf: 'center',
