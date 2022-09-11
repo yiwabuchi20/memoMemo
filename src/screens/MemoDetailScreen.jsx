@@ -1,24 +1,45 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import { shape, string } from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import firebase from 'firebase';
 import CircleButton from '../components/CircleButton';
 import MemoAppHeader from '../components/MemoAppHeader';
 import MemoContentArea from '../components/MemoContentArea';
 import MemoListItem from '../components/MemoListItem';
+import { dateToString } from '../utils';
 
 export default function MemoDetailScreen(props) {
-  const ITEM = { id: '1', title: 'a', date: '20200101' };
-  const CONTENT = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
-  const { navigation } = props;
+  const { navigation, route } = props;
+  const { id } = route.params;
+  const [memo, setMemo] = useState();
   const onPress = () => {
     navigation.navigate('Edit');
   };
+
+  useEffect(() => {
+    const { currentUser } = firebase.auth();
+    let unsubscribe = () => {};
+    if (currentUser) {
+      const db = firebase.firestore();
+      const ref = db.collection(`users/${currentUser.uid}/memos`).doc(id);
+      unsubscribe = ref.onSnapshot((doc) => {
+        const data = doc.data();
+        setMemo({
+          id: doc.id,
+          title: data.bodyText,
+          date: dateToString(data.updatedAt.toDate()),
+        });
+      });
+    }
+    return unsubscribe;
+  }, []);
 
   return (
     <>
       <StatusBar />
       <MemoAppHeader title="MemoApp" showBack />
-      <MemoListItem item={ITEM} />
-      <MemoContentArea data={CONTENT} />
+      {memo && <MemoListItem item={memo} />}
+      {memo && <MemoContentArea data={memo.title} />}
       <CircleButton
         onPress={onPress}
         name={'pencil'}
@@ -27,3 +48,8 @@ export default function MemoDetailScreen(props) {
     </>
   );
 }
+MemoDetailScreen.prototypes = {
+  route: shape({
+    params: shape({ id: string }),
+  }).isRequired,
+};

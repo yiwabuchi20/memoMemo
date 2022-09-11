@@ -5,6 +5,7 @@ import firebase from 'firebase';
 import CircleButton from '../components/CircleButton';
 import MemoAppHeader from '../components/MemoAppHeader';
 import MemoList from '../components/MemoList';
+import { dateToString } from '../utils';
 
 export default function MemoListScreen(props) {
   const { navigation } = props;
@@ -23,12 +24,11 @@ export default function MemoListScreen(props) {
         (snapshot) => {
           const userMemos = [];
           snapshot.forEach((doc) => {
-            console.log(doc.id, doc.data());
             const data = doc.data();
             userMemos.push({
               id: doc.id,
               title: data.bodyText,
-              date: data.updatedAt.toDate().toLocaleString(),
+              date: dateToString(data.updatedAt.toDate()),
             });
           });
           setMemos(userMemos);
