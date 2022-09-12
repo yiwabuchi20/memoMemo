@@ -10,7 +10,7 @@ import { dateToString } from '../utils';
 export default function MemoListScreen(props) {
   const { navigation } = props;
   const onPressPlus = () => {
-    navigation.navigate('Edit');
+    navigation.navigate('Create');
   };
   const [memos, setMemos] = useState([]);
 
