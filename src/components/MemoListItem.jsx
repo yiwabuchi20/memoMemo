@@ -6,7 +6,9 @@ function MemoListItem({ item }) {
   return (
     <View style={styles.container}>
       <View style={styles.memo}>
-        <Text style={styles.title}>{item.title}</Text>
+        <Text style={styles.title} numberOfLines={1}>
+          {item.bodyText}
+        </Text>
         <Text style={styles.date}>{item.date}</Text>
       </View>
     </View>
@@ -16,7 +18,7 @@ function MemoListItem({ item }) {
 MemoListItem.propTypes = {
   item: PropTypes.shape({
     id: string,
-    title: string,
+    bodyText: string,
     date: string,
   }).isRequired,
 };
@@ -30,15 +32,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#93D0AA',
   },
   memo: {
-    justifyContent: 'center',
+    flex: 1,
+    justifyContent: 'space-evenly',
   },
   title: {
     color: '#fff',
-    fontSize: 28,
+    fontSize: 20,
   },
   date: {
     color: '#fff',
-    fontSize: 14,
+    fontSize: 12,
   },
   delete: {
     alignSelf: 'center',

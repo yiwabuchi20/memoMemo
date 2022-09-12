@@ -1,25 +1,53 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { TouchableOpacity, View, StyleSheet } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { TouchableOpacity, View, StyleSheet, Alert } from 'react-native';
+import firebase from 'firebase';
 import CircleButton from '../components/CircleButton';
 import MemoAppHeader from '../components/MemoAppHeader';
 import MemoList from '../components/MemoList';
+import { dateToString } from '../utils';
 
 export default function MemoListScreen(props) {
   const { navigation } = props;
   const onPressPlus = () => {
-    navigation.navigate('Edit');
+    navigation.navigate('Create');
   };
-  const DATA = [
-    { id: '1', title: 'a', date: '20200101' },
-    { id: '2', title: 'b', date: '20200102' },
-  ];
+  const [memos, setMemos] = useState([]);
+
+  useEffect(() => {
+    const db = firebase.firestore();
+    const { currentUser } = firebase.auth();
+    let unsubscribe = () => {};
+    if (unsubscribe) {
+      const ref = db.collection(`users/${currentUser.uid}/memos`).orderBy('updatedAt', 'desc');
+      unsubscribe = ref.onSnapshot(
+        (snapshot) => {
+          const userMemos = [];
+          snapshot.forEach((doc) => {
+            const data = doc.data();
+            userMemos.push({
+              id: doc.id,
+              title: data.bodyText,
+              date: dateToString(data.updatedAt.toDate()),
+            });
+          });
+          setMemos(userMemos);
+        },
+        (error) => {
+          console.log(error);
+          Alert.alert('データの取得に失敗しました');
+        }
+      );
+    }
+    return unsubscribe;
+  }, []);
+
   return (
     <>
       <StatusBar />
       <MemoAppHeader title="MemoApp" showLogout />
       <View style={styles.container}>
-        <MemoList data={DATA} />
+        <MemoList data={memos} />
         <TouchableOpacity onPress={onPressPlus}>
           <CircleButton onPress={onPressPlus} name="plus" />
         </TouchableOpacity>

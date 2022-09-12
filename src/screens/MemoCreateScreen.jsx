@@ -1,36 +1,29 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { TextInput, StyleSheet, View, KeyboardAvoidingView, Alert } from 'react-native';
+import { TextInput, StyleSheet, View, KeyboardAvoidingView } from 'react-native';
 import firebase from 'firebase';
-import { shape, string } from 'prop-types';
 import CircleButton from '../components/CircleButton';
 import MemoAppHeader from '../components/MemoAppHeader';
 
-export default function MemoEditScreen(props) {
-  const { navigation, route } = props;
-  const { id, bodyText } = route.params;
-  const [editText, setEditText] = useState(bodyText);
+export default function MemoCreateScreen(props) {
+  const [bodyText, setBodyText] = useState('');
+  const { navigation } = props;
   const onPressCheck = () => {
+    const db = firebase.firestore();
     const { currentUser } = firebase.auth();
-    if (currentUser) {
-      const db = firebase.firestore();
-      const ref = db.collection(`users/${currentUser.uid}/memos`).doc(id);
-      ref
-        .set(
-          {
-            bodyText: editText,
-            updatedAt: new Date(),
-          },
-          // 更新したくないキーが存在する場合に設定する（今回は不要）
-          { merge: true },
-        )
-        .then(() => {
-          navigation.goBack();
-        })
-        .catch((error) => {
-          Alert.alert(error.code);
-        });
-    }
+    const ref = db.collection(`users/${currentUser.uid}/memos`);
+    ref
+      .add({
+        bodyText,
+        updatedAt: new Date(),
+      })
+      .then((docRef) => {
+        console.log('created', docRef.id);
+        navigation.goBack();
+      })
+      .catch((error) => {
+        console.log('error', error);
+      });
   };
   return (
     <>
@@ -39,8 +32,8 @@ export default function MemoEditScreen(props) {
       <KeyboardAvoidingView style={styles.container} behavior="height">
         <View style={styles.inputContainer}>
           <TextInput
-            value={editText}
-            onChangeText={setEditText}
+            value={bodyText}
+            onChangeText={setBodyText}
             style={styles.input}
             multiline
             autoFocus
@@ -51,12 +44,6 @@ export default function MemoEditScreen(props) {
     </>
   );
 }
-
-MemoEditScreen.prototypes = {
-  route: shape({
-    params: shape({ id: string, bodyText: string }),
-  }).isRequired,
-};
 
 const styles = StyleSheet.create({
   container: {

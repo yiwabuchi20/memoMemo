@@ -5,6 +5,7 @@ import firebase from 'firebase';
 
 import MemoDetailScreen from './src/screens/MemoDetailScreen';
 import MemoListScreen from './src/screens/MemoListScreen';
+import MemoCreateScreen from './src/screens/MemoCreateScreen';
 import MemoEditScreen from './src/screens/MemoEditScreen';
 import MemoLogInScreen from './src/screens/MemoLogInScreen';
 import MemoSignUpScreen from './src/screens/MemoSignUpScreen';
@@ -31,6 +32,7 @@ export default function App() {
       >
         <Stack.Screen name="List" component={MemoListScreen} />
         <Stack.Screen name="Detail" component={MemoDetailScreen} />
+        <Stack.Screen name="Create" component={MemoCreateScreen} />
         <Stack.Screen name="Edit" component={MemoEditScreen} />
         <Stack.Screen
           name="LogIn"
