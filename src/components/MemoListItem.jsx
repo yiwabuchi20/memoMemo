@@ -7,7 +7,7 @@ function MemoListItem({ item }) {
     <View style={styles.container}>
       <View style={styles.memo}>
         <Text style={styles.title} numberOfLines={1}>
-          {item.title}
+          {item.bodyText}
         </Text>
         <Text style={styles.date}>{item.date}</Text>
       </View>
@@ -18,7 +18,7 @@ function MemoListItem({ item }) {
 MemoListItem.propTypes = {
   item: PropTypes.shape({
     id: string,
-    title: string,
+    bodyText: string,
     date: string,
   }).isRequired,
 };

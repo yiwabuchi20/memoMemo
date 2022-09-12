@@ -12,8 +12,8 @@ export default function MemoDetailScreen(props) {
   const { navigation, route } = props;
   const { id } = route.params;
   const [memo, setMemo] = useState();
-  const onPress = () => {
-    navigation.navigate('Edit');
+  const onPressPencil = () => {
+    navigation.navigate('Edit', { id: memo.id, bodyText: memo.bodyText });
   };
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export default function MemoDetailScreen(props) {
         const data = doc.data();
         setMemo({
           id: doc.id,
-          title: data.bodyText,
+          bodyText: data.bodyText,
           date: dateToString(data.updatedAt.toDate()),
         });
       });
@@ -39,9 +39,9 @@ export default function MemoDetailScreen(props) {
       <StatusBar />
       <MemoAppHeader title="MemoApp" showBack />
       {memo && <MemoListItem item={memo} />}
-      {memo && <MemoContentArea data={memo.title} />}
+      {memo && <MemoContentArea data={memo.bodyText} />}
       <CircleButton
-        onPress={onPress}
+        onPress={onPressPencil}
         name={'pencil'}
         style={{ right: 30, top: 135, bottom: 'auto' }}
       />
