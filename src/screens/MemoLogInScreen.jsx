@@ -6,12 +6,15 @@ import { shape, func } from 'prop-types';
 import Button from '../components/Button';
 import MASpacer from '../components/MASpacer';
 import MemoAppHeader from '../components/MemoAppHeader';
+import Loading from '../components/Loading';
 
 export default function MemoLogInScreen(props) {
   const [mail, setMail] = useState('');
   const [pass, setPass] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const { navigation } = props;
   const onPressSubmit = () => {
+    setIsLoading(true);
     firebase
       .auth()
       .signInWithEmailAndPassword(mail, pass)
@@ -22,6 +25,9 @@ export default function MemoLogInScreen(props) {
       })
       .catch((error) => {
         Alert.alert(error.code);
+      })
+      .then(() => {
+        setIsLoading(false);
       });
   };
   const onPressSignUpText = () => {
@@ -29,11 +35,13 @@ export default function MemoLogInScreen(props) {
   };
 
   useEffect(() => {
+    setIsLoading(true);
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         navigation.navigate('List');
       }
     });
+    setIsLoading(false);
     return unsubscribe;
   }, []);
 
@@ -74,6 +82,7 @@ export default function MemoLogInScreen(props) {
             <Text style={styles.signUpText}>Sign up here!</Text>
           </TouchableOpacity>
         </View>
+        <Loading isLoading={isLoading} />
       </View>
     </>
   );
