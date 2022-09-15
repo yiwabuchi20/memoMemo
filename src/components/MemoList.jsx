@@ -3,11 +3,35 @@ import { View, Text, StyleSheet, FlatList, TouchableOpacity, Alert } from 'react
 import { string, PropTypes, shape } from 'prop-types';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import firebase from 'firebase';
 
 function MemoList({ data }) {
   const navigation = useNavigation();
   const onPressItem = (id) => {
     navigation.navigate('Detail', { id });
+  };
+  const onPressClose = (id) => {
+    const { currentUser } = firebase.auth();
+    if (currentUser) {
+      const db = firebase.firestore();
+      const ref = db.collection(`users/${currentUser.uid}/memos`).doc(id);
+
+      Alert.alert('メモを削除します', 'よろしいですか？', [
+        {
+          text: 'キャンセル',
+          onPress: () => {},
+        },
+        {
+          text: '削除する',
+          style: 'destructive',
+          onPress: () => {
+            ref.delete().catch(() => {
+              Alert.alert('削除に失敗しました');
+            });
+          },
+        },
+      ]);
+    }
   };
   const renderItem = (info) => {
     const { item } = info;
@@ -26,7 +50,7 @@ function MemoList({ data }) {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
-            Alert.alert('Are you sure?');
+            onPressClose(item.id);
           }}
           style={styles.delete}
         >

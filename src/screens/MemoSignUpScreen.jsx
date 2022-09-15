@@ -6,6 +6,7 @@ import { shape, func } from 'prop-types';
 import Button from '../components/Button';
 import MASpacer from '../components/MASpacer';
 import MemoAppHeader from '../components/MemoAppHeader';
+import { translateErrors } from '../utils';
 
 export default function MemoSignUpScreen(props) {
   const [mail, setMail] = useState('');
@@ -22,8 +23,8 @@ export default function MemoSignUpScreen(props) {
         navigation.navigate('List');
       })
       .catch((error) => {
-        console.log(error.code, error.message);
-        Alert.alert(error.code);
+        const errorMsg = translateErrors(error.code);
+        Alert.alert(errorMsg.title, errorMsg.description);
       });
   };
   return (
