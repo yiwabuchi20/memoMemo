@@ -1,9 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { TextInput, StyleSheet, View, KeyboardAvoidingView } from 'react-native';
+import {
+  TextInput, StyleSheet, View, KeyboardAvoidingView, Alert,
+} from 'react-native';
 import firebase from 'firebase';
 import CircleButton from '../components/CircleButton';
 import MemoAppHeader from '../components/MemoAppHeader';
+import { translateErrors } from '../utils';
 
 export default function MemoCreateScreen(props) {
   const [bodyText, setBodyText] = useState('');
@@ -17,12 +20,12 @@ export default function MemoCreateScreen(props) {
         bodyText,
         updatedAt: new Date(),
       })
-      .then((docRef) => {
-        console.log('created', docRef.id);
+      .then(() => {
         navigation.goBack();
       })
       .catch((error) => {
-        console.log('error', error);
+        const errorMsg = translateErrors(error.code);
+        Alert.alert(errorMsg);
       });
   };
   return (
@@ -39,7 +42,7 @@ export default function MemoCreateScreen(props) {
             autoFocus
           />
         </View>
-        <CircleButton onPress={onPressCheck} name={'check'} style={{ right: 30, bottom: 40 }} />
+        <CircleButton onPress={onPressCheck} name="check" style={{ right: 30, bottom: 40 }} />
       </KeyboardAvoidingView>
     </>
   );

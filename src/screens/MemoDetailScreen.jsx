@@ -42,7 +42,7 @@ export default function MemoDetailScreen(props) {
       {memo && <MemoContentArea data={memo.bodyText} />}
       <CircleButton
         onPress={onPressPencil}
-        name={'pencil'}
+        name="pencil"
         style={{ right: 30, top: 135, bottom: 'auto' }}
       />
     </>

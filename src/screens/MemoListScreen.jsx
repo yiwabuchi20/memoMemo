@@ -1,6 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { TouchableOpacity, View, StyleSheet, Alert, Text } from 'react-native';
+import {
+  TouchableOpacity, View, StyleSheet, Alert, Text,
+} from 'react-native';
 import firebase from 'firebase';
 import CircleButton from '../components/CircleButton';
 import MemoAppHeader from '../components/MemoAppHeader';
@@ -44,11 +46,10 @@ export default function MemoListScreen(props) {
           setMemos(userMemos);
           setIsLoading(false);
         },
-        (error) => {
-          console.log(error);
+        () => {
           setIsLoading(false);
           Alert.alert('データの取得に失敗しました');
-        }
+        },
       );
     }
     return unsubscribe;

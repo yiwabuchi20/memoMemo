@@ -1,6 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { TextInput, StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
+import {
+  TextInput, StyleSheet, View, Text, TouchableOpacity, Alert,
+} from 'react-native';
 import firebase from 'firebase';
 import { shape, func } from 'prop-types';
 import Button from '../components/Button';
@@ -19,9 +21,7 @@ export default function MemoLogInScreen(props) {
     firebase
       .auth()
       .signInWithEmailAndPassword(mail, pass)
-      .then((userCredential) => {
-        const { user } = userCredential;
-        console.log(user.uid);
+      .then(() => {
         navigation.navigate('List');
       })
       .catch((error) => {

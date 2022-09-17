@@ -18,4 +18,4 @@ MASpacer.defaultProps = {
   holizontal: false,
 };
 
-export default MASpacer
+export default MASpacer;
