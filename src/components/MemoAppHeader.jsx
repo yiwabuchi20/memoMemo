@@ -33,7 +33,7 @@ function MemoAppHeader({ title, showBack = false, showLogout = false }) {
       <View style={styles.rightCompontntContainer}>
         {showLogout && (
           <TouchableOpacity onPress={onPressLogOut}>
-            <Text style={styles.logout}>ログアウト</Text>
+            <Text style={styles.logout} numberOfLines={1}>ログアウト</Text>
           </TouchableOpacity>
         )}
       </View>
@@ -69,14 +69,15 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   leftCompontntContainer: {
-    width: '20%',
+    width: '30%',
   },
   rightCompontntContainer: {
-    width: '20%',
+    width: '30%',
     alignItems: 'flex-end',
   },
   logout: {
-    fontSize: 14,
+    fontSize: 16,
+    fontWeight: 'bold',
     color: 'rgba(255, 255, 255, 0.8)',
   },
 });

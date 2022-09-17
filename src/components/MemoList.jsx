@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, Alert } from 'react-native';
+import {
+  View, Text, StyleSheet, FlatList, TouchableOpacity, Alert,
+} from 'react-native';
 import { string, PropTypes, shape } from 'prop-types';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -68,7 +70,7 @@ MemoList.propTypes = {
       id: string,
       title: string,
       date: string,
-    })
+    }),
   ).isRequired,
 };
 

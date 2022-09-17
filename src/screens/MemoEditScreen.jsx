@@ -22,7 +22,7 @@ export default function MemoEditScreen(props) {
             updatedAt: new Date(),
           },
           // 更新したくないキーが存在する場合に設定する（今回は不要）
-          { merge: true },
+          { merge: true }
         )
         .then(() => {
           navigation.goBack();
@@ -46,7 +46,7 @@ export default function MemoEditScreen(props) {
             autoFocus
           />
         </View>
-        <CircleButton onPress={onPressCheck} name={'check'} style={{ right: 30, bottom: 40 }} />
+        <CircleButton onPress={onPressCheck} name="check" style={{ right: 30, bottom: 40 }} />
       </KeyboardAvoidingView>
     </>
   );
@@ -63,12 +63,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   inputContainer: {
-    paddingHorizontal: 16,
-    paddingVertical: 24,
+    paddingBottom: 80,
     flex: 1,
   },
   input: {
     flex: 1,
+    paddingHorizontal: 16,
+    paddingTop: 32,
+    paddingBottom: 32,
     textAlignVertical: 'top',
     fontSize: 16,
     lineHeight: 24,
